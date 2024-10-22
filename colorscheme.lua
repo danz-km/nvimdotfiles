@@ -2,7 +2,7 @@ return {
 	"folke/tokyonight.nvim",
 	priority = 1000,
 	config = function()
-		local transparent = true -- set to true if you would like to enable transparency
+		local transparent = true -- enable transparency if needed
 
 		local bg = "#011628"
 		local bg_dark = "#011423"
@@ -14,6 +14,7 @@ return {
 		local fg_gutter = "#627E97"
 		local border = "#547998"
 
+		-- Set up tokyonight colors
 		require("tokyonight").setup({
 			style = "night",
 			transparent = transparent,
@@ -40,6 +41,24 @@ return {
 			end,
 		})
 
+		-- Apply the tokyonight colorscheme
 		vim.cmd("colorscheme tokyonight")
+
+		-- Set up nvim-highlight-colors plugin for color highlightingwww
+		require("nvim-highlight-colors").setup({
+			render = "background", -- Highlight style
+			enable_hex = true, -- Enable hex color highlighting
+			enable_rgb = true, -- Enable rgb color highlighting
+			enable_hsl = true, -- Enable hsl color highlighting
+			enable_named_colors = true, -- Enable named colors (like 'red', 'blue')
+		})
+
+		-- Keybindings to toggle color highlights on and off
+		local keymap = vim.keymap.set
+		keymap("n", "<leader>hc", require("nvim-highlight-colors").toggle, { desc = "Toggle color highlights" }) -- Toggle highlight colors
 	end,
+	dependencies = {
+		-- Add nvim-highlight-colors plugin
+		"brenoprata10/nvim-highlight-colors",
+	},
 }
